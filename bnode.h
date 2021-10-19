@@ -42,6 +42,8 @@ public:
    // Move Constructor
    BNode(T&& t): pParent(nullptr),pLeft(nullptr),pRight(nullptr),data(t){}
 
+   
+   
    //
    // Data
    //
@@ -92,7 +94,7 @@ inline void addRight (BNode <T> * pNode, BNode <T> * pAdd)
 }
 
 /******************************************************
- * ADD LEFT
+ * ADD LEFT - Finished | Alexander
  * Add a node to the left of the current node
  ******************************************************/
 template <class T>
@@ -112,7 +114,7 @@ inline void addLeft(BNode <T>* pNode, T && t)
 }
 
 /******************************************************
- * ADD RIGHT
+ * ADD RIGHT - Finished | Alexander
  * Add a node to the right of the current node
  ******************************************************/
 template <class T>
@@ -131,7 +133,7 @@ void addRight(BNode <T>* pNode, T && t)
 }
 
 /*****************************************************
- * DELETE BINARY TREE - SemiFinished | Alexander
+ * DELETE BINARY TREE - Quasai Finished | Alexander
  * Delete all the nodes below pThis including pThis
  * using postfix traverse: LRV
  ****************************************************/
@@ -142,43 +144,82 @@ void clear(BNode <T> * & pThis)
    {
       return;
    }
-   // I think I'm calling these clears improperly.
-//   clear(pThis->pLeft);
-//   clear(pThis->pRight);
-//   delete pThis;
-   
-//   clear()
+   clear(pThis->pLeft);
+   clear(pThis->pRight);
+   pThis = NULL;
+
 }
 
 /***********************************************
- * SWAP
+ * SWAP - Finished | Alexander
  * Swap the list from LHS to RHS
  *   COST   : O(1)
  **********************************************/
 template <class T>
 inline void swap(BNode <T>*& pLHS, BNode <T>*& pRHS)
 {
-
+   BNode<T>* tempHead = pRHS;
+   pRHS = pLHS;
+   pLHS = tempHead;
 }
 
 /**********************************************
- * COPY BINARY TREE
+ * COPY BINARY TREE - Finished | Alexander
  * Copy pSrc->pRight to pDest->pRight and
  * pSrc->pLeft onto pDest->pLeft
  *********************************************/
 template <class T>
 BNode <T> * copy(const BNode <T> * pSrc)
 {
-   return new BNode<T>;
+   if (pSrc == nullptr) {
+      return NULL;
+   }
+   BNode<T>* destination = new BNode<T>(pSrc->data);
+   
+   destination->pLeft = copy(pSrc->pLeft);
+   if (destination->pLeft != nullptr) {
+      destination->pLeft->pParent = destination;
+   }
+   
+   destination->pRight = copy(pSrc->pRight);
+   if (destination->pRight != nullptr) {
+      destination->pRight->pParent =destination;
+   }
+   return destination;
 }
 
 /**********************************************
- * assign
+ * assign - Quasai Finished | Alexander
  * copy the values from pSrc onto pDest preserving
  * as many of the nodes as possible.
  *********************************************/
 template <class T>
 void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
 {
+   // Code seems correct, and functions correctly, but doesn't change %
+   // Correct clear and I think this should work.
+   //clear(pDest);
+   
+   // Source is Empty
+   if (pSrc == NULL) {
+      clear(pDest);
+      return;
+   }
 
+
+   // Destination is Empty
+   if (pDest == nullptr && pSrc != nullptr) {
+      pDest = new BNode<T>(pSrc->data);
+      assign(pDest->pRight, pSrc->pRight);
+      assign(pDest->pLeft, pSrc->pLeft);
+      return;
+   }
+   
+   // Neither the Source nor Destination are Empty
+   if (pDest != nullptr && pSrc != nullptr) {
+      pDest->data = pSrc->data;
+      assign(pDest->pRight, pSrc->pRight);
+      assign(pDest->pLeft, pSrc->pLeft);
+      return;
+   }
 }
