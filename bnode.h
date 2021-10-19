@@ -39,9 +39,6 @@ public:
    BNode(): pLeft(nullptr),pRight(nullptr),pParent(nullptr),data(T()){} // Default Constructor
    BNode(const T& t): pParent(nullptr),pLeft(nullptr),pRight(nullptr),data(t){} // Copy Constructor
    BNode(T&& t): pParent(nullptr),pLeft(nullptr),pRight(nullptr),data(t){} // Move Constructor
-
-   
-   
    
    //
    // Data
@@ -72,8 +69,7 @@ template <class T>
 inline void addLeft(BNode <T> * pNode, BNode <T> * pAdd)
 {
    if (pAdd)
-      pAdd->pParent = pNode;
-   
+      pAdd->pParent = pNode;  
    pNode->pLeft = pAdd;
 }
 
@@ -85,8 +81,7 @@ template <class T>
 inline void addRight (BNode <T> * pNode, BNode <T> * pAdd)
 {
    if (pAdd)
-      pAdd->pParent = pNode;
-   
+      pAdd->pParent = pNode; 
    pNode->pRight = pAdd;
 }
 
@@ -138,7 +133,8 @@ template <class T>
 void clear(BNode <T> * & pThis)
 {
    if (!pThis)
-       return;  
+       return;
+
    clear(pThis->pLeft);
    clear(pThis->pRight);
    pThis = NULL;
