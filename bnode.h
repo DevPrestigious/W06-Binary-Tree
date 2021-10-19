@@ -36,13 +36,12 @@ public:
    // Construct - Finished | Alexander
    //
    // Default Constructor
-   BNode(): pLeft(nullptr),pRight(nullptr),pParent(nullptr),data(T()){}
+   BNode(): pLeft(nullptr), pRight(nullptr), pParent(nullptr), data(T()){}
    // Copy Constructor
-   BNode(const T& t): pParent(nullptr),pLeft(nullptr),pRight(nullptr),data(t){}
+   BNode(const T& t): pParent(nullptr), pLeft(nullptr), pRight(nullptr), data(t){}
    // Move Constructor
-   BNode(T&& t): pParent(nullptr),pLeft(nullptr),pRight(nullptr),data(t){}
+   BNode(T&& t): pParent(nullptr), pLeft(nullptr), pRight(nullptr), data(t){}
 
-   
    
    //
    // Data
@@ -158,11 +157,9 @@ void clear(BNode <T> * & pThis)
 template <class T>
 inline void swap(BNode <T>*& pLHS, BNode <T>*& pRHS)
 {
-
    BNode<T>* tempHead = pRHS;
    pRHS = pLHS;
    pLHS = tempHead;
-
 }
 
 /**********************************************
@@ -207,7 +204,6 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
       clear(pDest);
       return;
    }
-
 
    // Destination is Empty
    if (pDest == nullptr && pSrc != nullptr) {
