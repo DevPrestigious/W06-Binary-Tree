@@ -61,7 +61,6 @@ inline size_t size(const BNode <T> * p)
    return size(p->pLeft) + 1 + size(p->pRight);
 }
 
-
 /******************************************************
  * ADD LEFT
  * Add a node to the left of the current node
@@ -136,8 +135,7 @@ template <class T>
 void clear(BNode <T> * & pThis)
 {
    if (!pThis)
-       return;
-  
+       return;  
    clear(pThis->pLeft);
    clear(pThis->pRight);
    pThis = NULL;
