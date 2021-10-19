@@ -56,9 +56,8 @@ public:
 template <class T>
 inline size_t size(const BNode <T> * p)
 {
-   if (p == nullptr)
+   if (!p)
       return 0;
-   
    return size(p->pLeft) + 1 + size(p->pRight);
 }
 
@@ -70,7 +69,7 @@ inline size_t size(const BNode <T> * p)
 template <class T>
 inline void addLeft(BNode <T> * pNode, BNode <T> * pAdd)
 {
-   if (pAdd != nullptr)
+   if (pAdd)
       pAdd->pParent = pNode;
    
    pNode->pLeft = pAdd;
@@ -83,7 +82,7 @@ inline void addLeft(BNode <T> * pNode, BNode <T> * pAdd)
 template <class T>
 inline void addRight (BNode <T> * pNode, BNode <T> * pAdd)
 {
-   if (pAdd != nullptr)
+   if (pAdd)
       pAdd->pParent = pNode;
    
    pNode->pRight = pAdd;
@@ -136,7 +135,7 @@ void addRight(BNode <T>* pNode, T && t)
 template <class T>
 void clear(BNode <T> * & pThis)
 {
-   if (pThis == nullptr)
+   if (!pThis)
        return;
   
    clear(pThis->pLeft);
@@ -165,7 +164,7 @@ inline void swap(BNode <T>*& pLHS, BNode <T>*& pRHS)
 template <class T>
 BNode <T> * copy(const BNode <T> * pSrc)
 {
-   if (pSrc == nullptr)
+   if (!pSrc)
       return NULL;
    
    BNode<T>* destination = new BNode<T>(pSrc->data);
@@ -190,13 +189,13 @@ template <class T>
 void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
 { 
    // Source is Empty
-   if (pSrc == NULL) {
+   if (!pSrc) {
       clear(pDest);
       return;
    }
 
    // Destination is Empty
-   if (pDest == nullptr && pSrc != nullptr) {
+   if (!pDest && pSrc) {  
       pDest = new BNode<T>(pSrc->data);
       assign(pDest->pRight, pSrc->pRight);
       assign(pDest->pLeft, pSrc->pLeft);
@@ -204,7 +203,7 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
    }
    
    // Neither the Source nor Destination are Empty
-   if (pDest != nullptr && pSrc != nullptr) {
+   if (pDest && pSrc) {
       pDest->data = pSrc->data;
       assign(pDest->pRight, pSrc->pRight);
       assign(pDest->pLeft, pSrc->pLeft);
