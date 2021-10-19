@@ -98,13 +98,17 @@ inline void addRight (BNode <T> * pNode, BNode <T> * pAdd)
 template <class T>
 inline void addLeft (BNode <T> * pNode, const T & t)
 {
-   
+   BNode<T>* pAdd = new BNode<T>(t);
+   pAdd->pParent = pNode;
+   pNode->pLeft = pAdd;
 }
 
 template <class T>
 inline void addLeft(BNode <T>* pNode, T && t)
 {
-
+   BNode<T>* pAdd = new BNode<T>(t);
+   pAdd->pParent = pNode;
+   pNode->pLeft = pAdd;
 }
 
 /******************************************************
@@ -114,24 +118,36 @@ inline void addLeft(BNode <T>* pNode, T && t)
 template <class T>
 void addRight (BNode <T> * pNode, const T & t)
 {
-
-}
+   BNode<T>* pAdd = new BNode<T>(t);
+   pAdd->pParent = pNode;
+   pNode->pRight = pAdd;}
 
 template <class T>
 void addRight(BNode <T>* pNode, T && t)
 {
-
+   BNode<T>* pAdd = new BNode<T>(t);
+   pAdd->pParent = pNode;
+   pNode->pRight = pAdd;
 }
 
 /*****************************************************
- * DELETE BINARY TREE
+ * DELETE BINARY TREE - SemiFinished | Alexander
  * Delete all the nodes below pThis including pThis
  * using postfix traverse: LRV
  ****************************************************/
 template <class T>
 void clear(BNode <T> * & pThis)
 {
-
+   if (pThis == nullptr)
+   {
+      return;
+   }
+   // I think I'm calling these clears improperly.
+//   clear(pThis->pLeft);
+//   clear(pThis->pRight);
+//   delete pThis;
+   
+//   clear()
 }
 
 /***********************************************
