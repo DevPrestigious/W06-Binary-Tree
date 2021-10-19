@@ -196,7 +196,6 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
       pDest = new BNode<T>(pSrc->data);
       assign(pDest->pRight, pSrc->pRight);
       assign(pDest->pLeft, pSrc->pLeft);
-      return;
    }
    
    // Neither the Source nor Destination are Empty
@@ -205,4 +204,10 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
       assign(pDest->pRight, pSrc->pRight);
       assign(pDest->pLeft, pSrc->pLeft);
    }
+
+   // Setting parent values
+   if (pDest->pRight)
+       pDest->pRight->pParent = pDest;
+   if (pDest->pLeft)
+       pDest->pLeft->pParent = pDest;
 }
