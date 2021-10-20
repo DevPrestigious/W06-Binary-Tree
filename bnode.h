@@ -114,7 +114,8 @@ void addRight (BNode <T> * pNode, const T & t)
 {
    BNode<T>* pAdd = new BNode<T>(t);
    pAdd->pParent = pNode;
-   pNode->pRight = pAdd;}
+   pNode->pRight = pAdd;
+}
 
 template <class T>
 void addRight(BNode <T>* pNode, T && t)
@@ -191,16 +192,16 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
       return;
    }
 
+   // Neither the Source nor Destination are Empty
+   if (pDest && pSrc) {
+       pDest->data = pSrc->data;
+       assign(pDest->pRight, pSrc->pRight);
+       assign(pDest->pLeft, pSrc->pLeft);
+   }
+
    // Destination is Empty
    if (!pDest && pSrc) {  
       pDest = new BNode<T>(pSrc->data);
-      assign(pDest->pRight, pSrc->pRight);
-      assign(pDest->pLeft, pSrc->pLeft);
-   }
-   
-   // Neither the Source nor Destination are Empty
-   if (pDest && pSrc) {
-      pDest->data = pSrc->data;
       assign(pDest->pRight, pSrc->pRight);
       assign(pDest->pLeft, pSrc->pLeft);
    }
@@ -208,6 +209,6 @@ void assign(BNode <T> * & pDest, const BNode <T>* pSrc)
    // Setting parent values
    if (pDest->pRight)
        pDest->pRight->pParent = pDest;
-   if (pDest->pLeft)
+   if (pDest->pLeft) 
        pDest->pLeft->pParent = pDest;
 }
